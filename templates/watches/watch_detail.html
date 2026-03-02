@@ -1,0 +1,62 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ watch.name }} - Watch Details</title>
+    <link rel="stylesheet" href="{% static 'watches/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'watches/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'watches/css/style.css' %}">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <h1>Watch Collection</h1>
+            <div>
+                <a href="{% url 'watches:watch_list' %}">Back to Catalog</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="watch-detail">
+            <div class="detail-container">
+                <div class="detail-image">
+                    {% if watch.image %}
+                    <img src="{{ watch.image.url }}" alt="{{ watch.name }}">
+                    {% else %}
+                    <img src="{% static 'watches/images/product/i1.png' %}" alt="{{ watch.name }}">
+                    {% endif %}
+                </div>
+                
+                <div class="detail-info">
+                    <h1>{{ watch.name }}</h1>
+                    <p class="product-price">${{ watch.price }}</p>
+                    
+                    <div class="description">
+                        <h3>Description</h3>
+                        <p>{{ watch.description }}</p>
+                    </div>
+                    
+                    <div class="timestamps">
+                        <p><small>Created: {{ watch.created_at|date:"F d, Y" }}</small></p>
+                        <p><small>Last Updated: {{ watch.updated_at|date:"F d, Y" }}</small></p>
+                    </div>
+                    
+                    <button onclick="addToCart('{{ watch.id }}')">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Ecommerce Watch Collection. All rights reserved.</p>
+    </footer>
+
+    <script src="{% static 'watches/js/all.min.js' %}"></script>
+    <script src="{% static 'watches/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'watches/js/myscript.js' %}"></script>
+</body>
+</html>
